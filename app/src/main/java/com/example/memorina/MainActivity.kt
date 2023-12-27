@@ -10,26 +10,28 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 
-var image1: ImageView? = null
-var image2: ImageView? = null
 
-val images = arrayOf(R.drawable.img1,R.drawable.img2,
-    R.drawable.img3,R.drawable.img4,R.drawable.img5,
-    R.drawable.img6,R.drawable.img7,R.drawable.img8)
-
-var founded_images: Int = 0
 class MainActivity : AppCompatActivity() {
+    private var image1: ImageView? = null
+    private var image2: ImageView? = null
+
+    private var max_cards_on_field = 16
+
+    private val images = arrayOf(R.drawable.img1,R.drawable.img2,
+        R.drawable.img3,R.drawable.img4,R.drawable.img5,
+        R.drawable.img6,R.drawable.img7,R.drawable.img8)
+
+    private var founded_images: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val layout = LinearLayout(applicationContext)
 
         layout.orientation = LinearLayout.VERTICAL
 
-        val image_indexes = (0..15).toList().toMutableList()
+        val image_indexes = IntArray(max_cards_on_field){it}
 
-        var max_cards_on_field = 16
-        val indexes = (0..15).toList().toMutableList()
-        val image_number = (0..7).toList().toMutableList()
+        val indexes = IntArray(max_cards_on_field){it}
+        val image_number = IntArray(max_cards_on_field/2){it}
 
         image_number.forEach{sprite ->
             for (i in 0 until 2){
